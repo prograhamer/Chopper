@@ -50,9 +50,7 @@ public class GroundFactoryScript : MonoBehaviour {
 				int previous = HeartRateZones[(int)lastZone];
 				float vDiff = target - previous;
 				float hDiff = 200f;
-				Debug.Log ("vDiff: " + vDiff + ", hDiff: " + hDiff);
-				float angle = (Mathf.Atan(-(target - previous) / 200f) / Mathf.PI) * 180f;
-				Debug.Log ("Angle: " + angle);
+				float angle = (Mathf.Atan(-vDiff / hDiff) / Mathf.PI) * 180f;
 				Transform clone = (Transform) Instantiate(Template, new Vector3(0, target - vDiff/2, z), Quaternion.Euler(angle, 0, 0));
 				Vector3 scale = clone.localScale;
 				scale.z = Mathf.Sqrt(hDiff*hDiff + vDiff*vDiff);
