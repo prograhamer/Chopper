@@ -27,11 +27,11 @@ public class HRMScript : MonoBehaviour {
 		Initialized = true;
 	}
 
-	public static double? GetHeartRate()
+	public static int? GetHeartRate()
 	{
 		if(_instance.Initialized)
 		{
-			return _instance.Device.HeartRate;
+			return _instance.Device.ComputedHeartRate;
 		}
 		else
 		{
