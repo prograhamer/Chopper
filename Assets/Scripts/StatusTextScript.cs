@@ -11,7 +11,11 @@ public class StatusTextScript : MonoBehaviour {
 	}
 
 	void Update () {
-		if(Chopper.TakeOffTriggered)
+		if(Chopper.Paused)
+		{
+			Message.text = "You crashed! Idiot!";
+		}
+		else if(Chopper.TakeOffTriggered)
 		{
 			Message.text = "Pedal your way over the obstacles";
 		}
