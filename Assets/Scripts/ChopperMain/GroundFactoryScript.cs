@@ -9,28 +9,15 @@ public class GroundFactoryScript : MonoBehaviour {
 	private const int ZONE_5 = 4;
 
 	public int[] HeartRateZones = {0, 113, 150, 168, 187}; 
-	public Transform Template;
+	public Transform GroundTemplate;
+	public Transform FinishTemplate;
 
 	private int[] Level = {
 		ZONE_1,
 		ZONE_1,
 		ZONE_1,
-		ZONE_2,
-		ZONE_2,
-		ZONE_3,
-		ZONE_3,
-		ZONE_4,
-		ZONE_4,
-		ZONE_5,
-		ZONE_5,
-		ZONE_4,
-		ZONE_4,
-		ZONE_3,
-		ZONE_3,
-		ZONE_2,
-		ZONE_2,
 		ZONE_1,
-		ZONE_1
+		ZONE_1,
 	};
 	
 	void Start () {
@@ -43,7 +30,7 @@ public class GroundFactoryScript : MonoBehaviour {
 
 			if(lastZone == null || lastZone == zone)
 			{
-				Instantiate(Template, new Vector3(0, target, z), Quaternion.identity);
+				Instantiate(GroundTemplate, new Vector3(0, target, z), Quaternion.identity);
 			}
 			else
 			{
@@ -51,7 +38,7 @@ public class GroundFactoryScript : MonoBehaviour {
 				float vDiff = target - previous;
 				float hDiff = 200f;
 				float angle = (Mathf.Atan(-vDiff / hDiff) / Mathf.PI) * 180f;
-				Transform clone = (Transform) Instantiate(Template, new Vector3(0, target - vDiff/2, z), Quaternion.Euler(angle, 0, 0));
+				Transform clone = (Transform) Instantiate(GroundTemplate, new Vector3(0, target - vDiff/2, z), Quaternion.Euler(angle, 0, 0));
 				Vector3 scale = clone.localScale;
 				scale.z = Mathf.Sqrt(hDiff*hDiff + vDiff*vDiff);
 				clone.localScale = scale;
@@ -60,5 +47,7 @@ public class GroundFactoryScript : MonoBehaviour {
 			lastZone = zone;
 			z += 200;
 		}
+
+		Instantiate(FinishTemplate, new Vector3(0, HeartRateZones[(int)lastZone] + 128, z - 99.5f), Quaternion.identity);
 	}
 }

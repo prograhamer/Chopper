@@ -36,7 +36,10 @@ public class ANTScript : MonoBehaviour {
 
 		try {
 			Connection = AntPlusConnection.GetConnection();
-			Connection.Connect ();
+			if(!Connection.Connected)
+			{
+				Connection.Connect ();
+			}
 			Initialized = true;
 		} catch(DuplicateConnectionException dce)
 		{

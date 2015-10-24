@@ -6,14 +6,28 @@ public class ChopperScript : MonoBehaviour {
 	public float VerticalSpeed = 1;
 	public int TakeOffTriggerThreshold = 100;
 	public bool TakeOffTriggered = false;
-	public bool Paused = false;
+	public bool Crashed = false;
+	public bool Won = false;
+
+	private bool Paused {
+		get{ return Crashed || Won; }
+	}
+
+	public GameObject Menu;
 
 	void OnTriggerEnter(Collider other)
 	{
 		if(other.gameObject.CompareTag("Hazard"))
 		{
 			Debug.Log ("Crashed!");
-			Paused = true;
+			Crashed = true;
+			Menu.SetActive(true);
+		}
+		else if(other.gameObject.CompareTag("Goal"))
+		{
+			Debug.Log ("Won!");
+			Won = true;
+			Menu.SetActive(true);
 		}
 	}
 
